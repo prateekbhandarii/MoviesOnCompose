@@ -70,6 +70,10 @@ dependencies {
     //retrofit
     implementation(libs.retrofit)
     implementation(libs.gson.converter)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.okhttp)
+    implementation(libs.coil.compose)
+
     //jetpack navigation
     implementation(libs.compose.navigation)
 }

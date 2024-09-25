@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,16 +19,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Size
 import example.android.moviesoncompose.R
-import example.android.moviesoncompose.data.Movies
+import example.android.moviesoncompose.activity.MainActivity
+import example.android.moviesoncompose.data.Movie
 
 @Composable
-fun MovieListItem(movie: Movies) {
+fun MovieListItem(movie: Movie) {
     Row(
         modifier = Modifier
             .padding(16.dp)
@@ -37,9 +44,14 @@ fun MovieListItem(movie: Movies) {
                 .wrapContentWidth()
                 .wrapContentHeight()
         ) {
-            Image(
-                painter = painterResource(movie.image),
-                contentDescription = "Movie thumbnail",
+            val imageState = rememberAsyncImagePainter(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(movie.poster_path)
+                    .size(Size.ORIGINAL).build()
+            ).state
+
+            ShowPosterImage(
+                imageState = imageState,
                 modifier = Modifier
                     .size(width = 92.dp, height = 134.dp)
                     .clip(RoundedCornerShape(8.dp))
@@ -65,7 +77,7 @@ fun MovieListItem(movie: Movies) {
                         modifier = Modifier.size(5.dp)
                     )
                     Text(
-                        text = movie.rating.toString(),
+                        text = movie.vote_average.toString(),
                         color = Color.White,
                         fontSize = 16.sp
                     )
@@ -78,14 +90,14 @@ fun MovieListItem(movie: Movies) {
                 .padding(start = 16.dp)
         ) {
             Text(
-                text = movie.name,
+                text = movie.original_title,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
             )
             Spacer(modifier = Modifier.size(10.dp))
             Text(
                 color = Color.DarkGray,
-                text = movie.description,
+                text = movie.overview,
                 lineHeight = 20.sp,
                 fontSize = 16.sp,
             )
@@ -94,15 +106,22 @@ fun MovieListItem(movie: Movies) {
 }
 
 @Composable
-@Preview(showBackground = true)
-fun MovieListItemPreview() {
-    MovieListItem(
-        Movies(
-            1,
-            "The Godfather",
-            "Cheese on toast airedale the big cheese. Danish fontina cheesy grin airedale danish fontina taleggio the big cheese macaroni cheese port-salut. Edam fromage lancashire feta caerphilly.",
-            R.drawable.sample_movie_thumbnail,
-            7.5
+private fun ShowPosterImage(imageState: AsyncImagePainter.State, modifier: Modifier) {
+    if (imageState is AsyncImagePainter.State.Success) {
+        Image(
+            painter = imageState.painter,
+            contentDescription = "Movie thumbnail",
+            modifier = modifier
         )
-    )
+    } else {
+        Box(modifier = modifier, contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
+    }
+}
+
+@Preview
+@Composable
+fun ItemPreview() {
+    MovieListItem(movie = MainActivity.getDummyObject())
 }
