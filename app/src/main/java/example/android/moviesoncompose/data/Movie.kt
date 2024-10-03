@@ -1,9 +1,13 @@
 package example.android.moviesoncompose.data
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Data(
     val page: Int, val results: List<Movie>, val total_pages: Int, val total_results: Int
 )
 
+@Serializable
 data class Movie(
     val adult: Boolean,
     val backdrop_path: String,

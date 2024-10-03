@@ -35,6 +35,7 @@ compose-navigation = { group = "androidx.navigation", name = "navigation-compose
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "loggingInterceptor" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version="1.6.0"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

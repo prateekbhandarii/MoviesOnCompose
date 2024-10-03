@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MainViewModel(
+class TopMoviesViewModel(
     private val repository: MoviesRepository
 ) : ViewModel() {
 

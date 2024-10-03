@@ -30,7 +30,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import example.android.moviesoncompose.R
-import example.android.moviesoncompose.activity.MainActivity
+import example.android.moviesoncompose.activity.TopMoviesActivity
 import example.android.moviesoncompose.data.Movie
 
 @Composable
@@ -123,5 +123,5 @@ private fun ShowPosterImage(imageState: AsyncImagePainter.State, modifier: Modif
 @Preview
 @Composable
 fun ItemPreview() {
-    MovieListItem(movie = MainActivity.getDummyObject())
+    MovieListItem(movie = TopMoviesActivity.getDummyObject())
 }

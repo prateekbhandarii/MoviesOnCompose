@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import example.android.moviesoncompose.composable.MovieListItem
 import example.android.moviesoncompose.composable.SearchBar
 import example.android.moviesoncompose.data.Movie
@@ -33,7 +34,7 @@ import example.android.moviesoncompose.repository.MoviesRepositoryImpl
 import example.android.moviesoncompose.ui.theme.MoviesOnComposeTheme
 import kotlinx.coroutines.flow.collectLatest
 
-class MainActivity : ComponentActivity() {
+class TopMoviesActivity(navController: NavController) : ComponentActivity() {
 
     companion object {
         fun getDummyObject(): Movie {
@@ -56,10 +57,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private val viewModel by viewModels<MainViewModel>(factoryProducer = {
+    private val viewModel by viewModels<TopMoviesViewModel>(factoryProducer = {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return MainViewModel(MoviesRepositoryImpl(RetrofitObject.moviesService)) as T
+                return TopMoviesViewModel(MoviesRepositoryImpl(RetrofitObject.moviesService)) as T
             }
         }
     })
@@ -135,5 +136,5 @@ fun MoviesList(list: List<Movie>) {
 @Preview(showBackground = true)
 @Composable
 fun ScreenPreview() {
-    MoviesList(listOf(MainActivity.getDummyObject()))
+    MoviesList(listOf(TopMoviesActivity.getDummyObject()))
 }
