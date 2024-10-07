@@ -25,7 +25,7 @@ fun Navigation() {
                 }
             )
         ) {
-            MovieDetailsActivity()
+            MovieDetailsActivity(navController)
         }
     }
 }

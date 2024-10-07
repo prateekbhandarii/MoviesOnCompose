@@ -16,18 +16,22 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import example.android.moviesoncompose.composable.MovieListItem
 import example.android.moviesoncompose.composable.SearchBar
+import example.android.moviesoncompose.composable.Toolbar
 import example.android.moviesoncompose.data.Movie
 import example.android.moviesoncompose.network.RetrofitObject
 import example.android.moviesoncompose.repository.MoviesRepositoryImpl
@@ -106,13 +110,21 @@ class TopMoviesActivity(navController: NavController) : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MoviesList(list: List<Movie>) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Top Movies") },
+            Toolbar(
+                text = {
+                    Text(
+                        text = "Top Movies",
+                        fontSize = 32.sp,
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                    )
+                },
+                backgroundColor = Color.White,
+                elevation = 0.dp
             )
         }
     ) { contentPadding ->
