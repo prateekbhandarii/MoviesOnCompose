@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -29,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import example.android.moviesoncompose.composable.MovieListItem
+import example.android.moviesoncompose.composable.TopMoviesListItem
 import example.android.moviesoncompose.composable.SearchBar
 import example.android.moviesoncompose.composable.Toolbar
 import example.android.moviesoncompose.data.Movie
@@ -138,7 +137,7 @@ fun MoviesList(list: List<Movie>) {
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 items(list) { movie ->
-                    MovieListItem(movie)
+                    TopMoviesListItem(movie)
                 }
             }
         }

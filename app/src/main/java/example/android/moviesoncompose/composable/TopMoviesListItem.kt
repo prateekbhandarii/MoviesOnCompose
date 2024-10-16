@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,12 +27,11 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
-import example.android.moviesoncompose.R
 import example.android.moviesoncompose.activity.TopMoviesActivity
 import example.android.moviesoncompose.data.Movie
 
 @Composable
-fun MovieListItem(movie: Movie) {
+fun TopMoviesListItem(movie: Movie) {
     Row(
         modifier = Modifier
             .padding(16.dp)
@@ -59,30 +56,13 @@ fun MovieListItem(movie: Movie) {
 
             Spacer(modifier = Modifier.size(10.dp))
 
-            Box(
+            RatingBox(
+                movie = movie,
                 modifier = Modifier
                     .clip(RoundedCornerShape(5.dp))
                     .background(Color.Black)
                     .padding(5.dp)
-            ) {
-                Row {
-                    Icon(
-                        painter = painterResource(R.drawable.rating_star),
-                        contentDescription = "Rating logo",
-                        tint = Color.White,
-                        modifier = Modifier
-                            .size(16.dp)
-                    )
-                    Spacer(
-                        modifier = Modifier.size(5.dp)
-                    )
-                    Text(
-                        text = movie.vote_average.toString(),
-                        color = Color.White,
-                        fontSize = 16.sp
-                    )
-                }
-            }
+            )
         }
 
         Column(
@@ -123,5 +103,5 @@ private fun ShowPosterImage(imageState: AsyncImagePainter.State, modifier: Modif
 @Preview
 @Composable
 fun ItemPreview() {
-    MovieListItem(movie = TopMoviesActivity.getDummyObject())
+    TopMoviesListItem(movie = TopMoviesActivity.getDummyObject())
 }

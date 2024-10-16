@@ -11,6 +11,7 @@ import java.io.IOException
 interface MoviesRepository {
 
     suspend fun getTopRatedMovies(): Flow<Result<List<Movie>>>
+    suspend fun getSimilarMovies(): Flow<Result<List<Movie>>>
 }
 
 class MoviesRepositoryImpl(
@@ -36,6 +37,28 @@ class MoviesRepositoryImpl(
             }
 
             emit(Result.Success(topRatedMovies.results))
+        }
+    }
+
+    override suspend fun getSimilarMovies(): Flow<Result<List<Movie>>> {
+        return flow {
+            val similarMovies = try {
+                service.getSimilarMovies()
+            } catch (e: IOException) {
+                e.printStackTrace()
+                emit(Result.Error(message = "Error loading movies"))
+                return@flow
+            } catch (e: HttpException) {
+                e.printStackTrace()
+                emit(Result.Error(message = "Network error"))
+                return@flow
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emit(Result.Error(message = "Error loading movies"))
+                return@flow
+            }
+
+            emit(Result.Success(similarMovies.results))
         }
     }
 }

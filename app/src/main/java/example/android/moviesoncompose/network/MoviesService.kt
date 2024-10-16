@@ -12,4 +12,7 @@ interface MoviesService {
 
     @GET("/top_rated")
     suspend fun getTopRatedMovies(): Data
+
+    @GET("/movie_similar")
+    suspend fun getSimilarMovies(): Data
 }
