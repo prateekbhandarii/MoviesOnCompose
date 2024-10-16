@@ -88,7 +88,7 @@ fun SuggestionMovieListItem(movie: Movie) {
             )
         }
 
-        Spacer(Modifier.size(8.dp))
+        Spacer(Modifier.size(16.dp))
     }
 }
 

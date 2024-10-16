@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
@@ -131,7 +132,42 @@ fun ShowMovieDetails(navController: NavController?, movie: Movie) {
             Spacer(Modifier.size(10.dp))
 
             LazyRow {
-                items(10) { index ->
+                val similarMovies: List<Movie> = listOf(
+                    Movie(
+                        false,
+                        "/kXfqcdQKsToO0OUXHcrrNCHDBzO.jpg",
+                        listOf(18, 80),
+                        278,
+                        "en",
+                        "The Shawshank Redemption",
+                        "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.",
+                        204.296,
+                        "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+                        "1994-09-23",
+                        "The Shawshank Redemption",
+                        false,
+                        8.706,
+                        26843
+                    ),
+                    Movie(
+                        false,
+                        "/kXfqcdQKsToO0OUXHcrrNCHDBzO.jpg",
+                        listOf(18, 80),
+                        279,
+                        "en",
+                        "The Shawshank Redemption",
+                        "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.",
+                        204.296,
+                        "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+                        "1994-09-23",
+                        "The Shawshank Redemption",
+                        false,
+                        8.706,
+                        26843
+                    )
+                )
+
+                items(similarMovies, key = { item: Movie -> item.id }) { movie ->
                     SuggestionMovieListItem(movie)
                 }
             }
